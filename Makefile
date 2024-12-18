@@ -1,19 +1,18 @@
+# Compiler and Flags
 CC = gcc
 CFLAGS = -Wall -pthread
 
+# Target to build the main executable
 all: main
 
-main: main.o input_handler.o count_even.o
-	$(CC) $(CFLAGS) -o main main.o input_handler.o count_even.o
+# Rule to create the final executable
+main: main.o
+	$(CC) $(CFLAGS) -o main main.o
 
-main.o: main.c input_handler.h count_even.h
+# Rule to compile the C file into an object file
+main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
 
-input_handler.o: input_handler.c input_handler.h
-	$(CC) $(CFLAGS) -c input_handler.c
-
-count_even.o: count_even.c count_even.h
-	$(CC) $(CFLAGS) -c count_even.c
-
+# Rule to clean the object files and the executable
 clean:
 	rm -f *.o main
